@@ -28,9 +28,9 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Illuminate\\": "app/Overrides/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Grimzy\\LaravelMysqlSpatial\\Eloquent\\": "app/Overrides/"
         }
     },
     "autoload-dev": {
