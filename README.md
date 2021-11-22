@@ -3,7 +3,7 @@
 Xampp Mysql Module & php Artisan CLI
 PHP 7.3.28 & Mysql Ver 15.1 Distrib 10.4.19-MariaDB
 
-## Step for setup
+## Steps for integration
 - composer update
 - set env parameters
 - php artisan migrate
