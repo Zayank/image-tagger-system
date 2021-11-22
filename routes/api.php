@@ -18,12 +18,30 @@ use App\Http\Controllers\PostController;
 */
 
 // Public routes
-Route::post('user/register', [AuthController::class, 'register']);
-Route::post('user/login', [AuthController::class, 'login']);
 
+//signup
+Route::post('/user/register', [AuthController::class, 'register']);
+//signin
+Route::post('/user/login', [AuthController::class, 'login']);
+//public posts
+Route::get('/posts', [PostController::class, 'index']);
+
+
+//Protected routes
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('user/logout', [AuthController::class, 'logout']);
+    //all user posts
+    Route::get('/myposts', [PostController::class, 'users_posts']);
+    //upload file
+    Route::post('/posts/upload-file', [PostController::class, 'upload_file']);
+    //create post
+    Route::post('/posts', [PostController::class, 'store']);
+    //post details
+    Route::get('/posts/{id}', [PostController::class, 'show'])->whereNumber('id');
+    //update post
+    Route::put('/posts/{id}', [PostController::class, 'update'])->whereNumber('id');    
+    
+    //logout
+    Route::post('/user/logout', [AuthController::class, 'logout']);
+    
 });
-
-

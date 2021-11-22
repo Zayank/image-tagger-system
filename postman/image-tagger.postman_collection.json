@@ -1,0 +1,4019 @@
+{
+	"info": {
+		"_postman_id": "621f2ebc-1f50-4e49-ad60-065b8333a690",
+		"name": "image-tagger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"pm.test(\"Set environment variable for token\", function () {\r",
+							"    if(pm.expect(pm.response.code).to.be.oneOf([201, 202])){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"token\", jsonData.data.token);\r",
+							"    pm.environment.set(\"email\", pm.request.body.urlencoded.get('email'));\r",
+							"    pm.environment.set(\"password\", pm.request.body.urlencoded.get('password'));\r",
+							"\r",
+							"    }    \r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "test name",
+							"description": "required|string|max:255",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "user_{{$timestamp}}@gmail.com",
+							"description": "required|email",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345aA>",
+							"description": "required|min:4|max:32|[0-9][A-Z][a-z][!@#$%^&*()\\-_=+{};:,<.>ยง~]",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test name",
+									"description": "required|string|max:255",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@gmail.com",
+									"description": "required|email",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345aA>",
+									"description": "required|min:4|max:32|[0-9][A-Z][a-z][!@#$%^&*()\\-_=+{};:,<.>ยง~]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 15:30:32 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 15:30:32 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"data\": {\n        \"token\": \"27|eCxnNaiygaBeskWdfTPmXw8KPLcpYqtbImxt7YCv\"\n    }\n}"
+				},
+				{
+					"name": "Name field not provided",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test name",
+									"description": "required|string|max:255",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "test@gmail.com",
+									"description": "required|email",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345aA>",
+									"description": "required|min:4|max:32|[0-9][A-Z][a-z][!@#$%^&*()\\-_=+{};:,<.>ยง~]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:29:30 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:29:30 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"name\": [\n            \"name is required.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Email field not provided",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test name",
+									"description": "required|string|max:255",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@gmail.com",
+									"description": "required|email",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "12345aA>",
+									"description": "required|min:4|max:32|[0-9][A-Z][a-z][!@#$%^&*()\\-_=+{};:,<.>ยง~]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:31:44 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:31:44 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"email\": [\n            \"email is required.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Password field not provided",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test name",
+									"description": "required|string|max:255",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@gmail.com",
+									"description": "required|email",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345aA>",
+									"description": "required|min:4|max:32|[0-9][A-Z][a-z][!@#$%^&*()\\-_=+{};:,<.>ยง~]",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:32:59 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:32:59 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"password\": [\n            \"password is required.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Invalid Email",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test name",
+									"description": "required|string|max:255",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@gma",
+									"description": "required|email",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345aA>",
+									"description": "required|min:4|max:32|[0-9][A-Z][a-z][!@#$%^&*()\\-_=+{};:,<.>ยง~]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:35:50 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:35:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"email\": [\n            \"The email must be a valid email address.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Invalid Password",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test name",
+									"description": "required|string|max:255",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@gmail.com",
+									"description": "required|email",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"description": "required|min:4|max:32|[0-9][A-Z][a-z][!@#$%^&*()\\-_=+{};:,<.>ยง~]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:37:17 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:37:17 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"password\": [\n            \"The password field must be at least one uppercase letter.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Already registered User",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test name",
+									"description": "required|string|max:255",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@gmail.com",
+									"description": "required|email",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345aA>",
+									"description": "required|min:4|max:32|[0-9][A-Z][a-z][!@#$%^&*()\\-_=+{};:,<.>ยง~]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:38:42 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:38:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "57"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"email\": [\n            \"The email is already in use.\"\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Set environment variable for token\", function () {\r",
+							"    if(pm.response.to.have.status(200)){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"token\", jsonData.data.token);\r",
+							"\r",
+							"    }    \r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{email}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 13:39:11 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 13:39:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"data\": {\n        \"token\": \"26|U6PkEAe560fot6wCcPJIm30CC55weSqkbYt65280\"\n    }\n}"
+				},
+				{
+					"name": "Credentials not provided",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:41:16 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:41:16 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"email\": [\n            \"email is required.\"\n        ],\n        \"password\": [\n            \"password is required.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Invalid Credentials",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:39:39 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:39:39 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": \"These credentials do not match our records.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Posts upload-file",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Set environment variable for filename\", function () {\r",
+							"    if(pm.expect(pm.response.code).to.be.oneOf([201, 202])){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"filename\", jsonData.data.filename);\r",
+							"\r",
+							"    }    \r",
+							"});\r",
+							";"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"description": "required|mimes:png,jpg,jpeg,gif|max:45mb",
+							"type": "file",
+							"src": "Sample-Image-File-for-Testing.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/posts/upload-file",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"posts",
+						"upload-file"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/zayan/Pictures/Screenshots/Screenshot (23).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/upload-file",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"upload-file"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 14:03:41 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 14:03:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"data\": {\n        \"filename\": \"MORlgdDb0VlIbK4jozfclOtWbAPlNLvPVDDtke0y.png\",\n        \"image_url\": \"http://127.0.0.1:8000/storage/posts/tmp/MORlgdDb0VlIbK4jozfclOtWbAPlNLvPVDDtke0y.png\",\n        \"dimension\": {\n            \"width\": 1920,\n            \"height\": 1080,\n            \"unit\": \"pixels\"\n        },\n        \"mime\": \"image/png\"\n    }\n}"
+				},
+				{
+					"name": "Unauthorized",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "Sample-Image-File-for-Testing.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/upload-file",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"upload-file"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:51:48 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:51:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": \"Not authenticated\"\n}"
+				},
+				{
+					"name": "Image not provided",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/zayan/Pictures/Screenshots/Screenshot (23).png",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/upload-file",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"upload-file"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:45:09 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:45:09 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"image\": [\n            \"The image field is required.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Invalid Image provided",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/zayan/Desktop/Google-Login-in-CodeIgniter-master.zip"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/upload-file",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"upload-file"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:45:53 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:45:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"image\": [\n            \"The image must be a file of type: png, jpg, jpeg, gif.\"\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Posts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Set environment variable for post id\", function () {\r",
+							"    if(pm.expect(pm.response.code).to.be.oneOf([201, 202])){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"id\", jsonData.data.id);\r",
+							"\r",
+							"    }    \r",
+							"});\r",
+							";"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\"     : \"title name\",\r\n    \"catagory\"  : \"sample\",\r\n    \"public\"    : 0,  \r\n    \"filename\"  :\"{{filename}}\",\r\n    \"tags\"       : [\r\n                    {\r\n                        \"area\"  :[[10,10],[50,10],[50,100],[20,100]],\r\n                         \"labels\":{  \r\n                                    \"name\"     :\"test name 1\",\r\n                                    \"location\" :\"location 1\"      \r\n                                 }\r\n                    },\r\n                    {\r\n                         \"area\":[[10,10],[50,120],[20,100],[50,10]],\r\n                       \"labels\":{  \r\n                                    \"name\"     :\"test name 2\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }\r\n                    }\r\n                    \r\n                ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/posts",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"posts"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "nullable|string|max:255",
+							"disabled": true
+						},
+						{
+							"key": "catagory",
+							"value": "nullable|string|max:255",
+							"disabled": true
+						},
+						{
+							"key": "public",
+							"value": "nullable|boolean",
+							"disabled": true
+						},
+						{
+							"key": "filename",
+							"value": "required",
+							"disabled": true
+						},
+						{
+							"key": "tags",
+							"value": "nullable|array|max:100",
+							"disabled": true
+						},
+						{
+							"key": "tags.*.area",
+							"value": "required_with:tags|array|size:4",
+							"disabled": true
+						},
+						{
+							"key": "tags.*.area.*",
+							"value": "required_with:tags|size:2",
+							"disabled": true
+						},
+						{
+							"key": "tags.*.labels",
+							"value": "array|max:100",
+							"disabled": true
+						},
+						{
+							"key": "tags.*.labels.*",
+							"value": "sometimes|required'|string|max:255",
+							"disabled": true
+						},
+						{
+							"key": "tags.*.labels.*.*[",
+							"value": "nullable|max:255",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\"     : \"title name\",\r\n    \"catagory\"  : \"sample\",\r\n    \"public\"    : true,  \r\n    \"filename\"  :\"MORlgdDb0VlIbK4jozfclOtWbAPlNLvPVDDtke0y.png\",\r\n    \"tags\"       : [\r\n                    {\r\n                        \"area\"  :[[120,180],[120,180],[125,700],[123,705]],\r\n                         \"labels\":{  \r\n                                    \"name\"     :\"test name 1\",\r\n                                    \"location\" :\"location 1\"      \r\n                                 }\r\n                    },\r\n                    {\r\n                        \"area\":[[120,180],[120,180],[125,700],[123,705]],\r\n                        \"labels\":{  \r\n                                    \"name\"     :\"test name 2\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }\r\n                    }\r\n                    \r\n                ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 14:04:00 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 14:04:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "57"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"message\": \"post created\",\n    \"data\": {\n        \"id\": 5\n    }\n}"
+				},
+				{
+					"name": "Unauthorized",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\"     : \"title name\",\r\n    \"catagory\"  : \"sample\",\r\n    \"public\"    : true,  \r\n    \"filename\"  :\"{{filename}}\",\r\n    \"tags\"       : [\r\n                    {\r\n                        \"area\"  :[[10,10],[50,10],[50,100],[20,100]],\r\n                         \"labels\":{  \r\n                                    \"name\"     :\"test name 1\",\r\n                                    \"location\" :\"location 1\"      \r\n                                 }\r\n                    },\r\n                    {\r\n                        \"area\":[[10,10],[50,100],[20,100],[50,10]],\r\n                        \"labels\":{  \r\n                                    \"name\"     :\"test name 2\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }\r\n                    }\r\n                    \r\n                ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:52:21 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:52:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": \"Not authenticated\"\n}"
+				},
+				{
+					"name": "Filename not provided",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tags\"       : [\r\n                    {\r\n                        \"area\"  :[[120,180],[120,180],[125,700],[123,705]],\r\n                         \"labels\":{  \r\n                                    \"name\"     :\"test name 1\",\r\n                                    \"location\" :\"location 1\"      \r\n                                 }\r\n                    },\r\n                    {\r\n                        \"area\":[[220,180],[120,180],[125,466],[123,705]],\r\n                        \"labels\":{  \r\n                                    \"name\"     :\"test name 2\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }\r\n                    }\r\n                    \r\n                ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:49:02 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 17:49:02 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"filename\": [\n            \"The filename field is required.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Already processed image",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\"     : \"title name\",\r\n    \"catagory\"  : \"sample\",\r\n    \"public\"    : true,  \r\n    \"filename\"  :\"{{filename}}\",\r\n    \"tags\"       : [\r\n                    {\r\n                        \"area\"  :[[120,180],[120,180],[125,700],[123,705]],\r\n                         \"labels\":{  \r\n                                    \"name\"     :\"test name 1\",\r\n                                    \"location\" :\"location 1\"      \r\n                                 }\r\n                    },\r\n                    {\r\n                        \"area\":[[120,180],[120,180],[125,700],[123,705]],\r\n                        \"labels\":{  \r\n                                    \"name\"     :\"test name 2\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }\r\n                    }\r\n                    \r\n                ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 18:35:52 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 18:35:52 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"filename\": [\n            \"file not found\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Invalid number of Coordinates",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\"     : \"title name\",\r\n    \"catagory\"  : \"sample\",\r\n    \"public\"    : true,  \r\n    \"filename\"  :\"{{filename}}\",\r\n    \"tags\"       : [\r\n                    {\r\n                        \"area\"  :[[50,100],[20,100]],\r\n                         \"labels\":{  \r\n                                    \"name\"     :\"test name 1\",\r\n                                    \"location\" :\"location 1\"      \r\n                                 }\r\n                    },\r\n                    {\r\n                        \"area\":[[10,10],[50,100],[20,100],[50,10]],\r\n                        \"labels\":{  \r\n                                    \"name\"     :\"test name 2\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }\r\n                    }\r\n                    \r\n                ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 22:47:33 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 22:47:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"tags.0.area\": [\n            \"The tags.0.area must contain 4 items.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Coordinates out of bounds",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\"     : \"title name\",\r\n    \"catagory\"  : \"sample\",\r\n    \"public\"    : true,  \r\n    \"filename\"  :\"{{filename}}\",\r\n    \"tags\"       : [\r\n                    {\r\n                        \"area\"  :[[1000,10],[50,10],[50,100],[20,100]],\r\n                         \"labels\":{  \r\n                                    \"name\"     :123,\r\n                                    \"location\" :\"location 1\"      \r\n                                 }\r\n                    },\r\n                    {\r\n                        \"area\":[[10,10],[50,100],[20,100],[50,10]],\r\n                        \"labels\":{  \r\n                                    \"name\"     :\"test name 2\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }\r\n                    }\r\n                    \r\n                ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:29:17 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:29:17 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"tags.0.area.0\": [\n            \"tags.0.area.0 out of bounds\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Tag present without Area",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\"     : \"title name\",\r\n    \"catagory\"  : \"sample\",\r\n    \"public\"    : true,  \r\n    \"filename\"  :\"{{filename}}\",\r\n    \"tags\"       : [\r\n                    {\r\n                         \"labels\":{  \r\n                                    \"name\"     :\"test name 1\",\r\n                                    \"location\" :\"location 1\"      \r\n                                 }\r\n                    },\r\n                    {\r\n                        \"area\":[[10,10],[50,100],[20,100],[50,10]],\r\n                        \"labels\":{  \r\n                                    \"name\"     :\"test name 2\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }\r\n                    }\r\n                    \r\n                ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:59:53 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:59:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"tags.0.area\": [\n            \"The tags.0.area field is required when tags is present.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Invalid Label format",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\"     : \"title name\",\r\n    \"catagory\"  : \"sample\",\r\n    \"public\"    : true,  \r\n    \"filename\"  :\"{{filename}}\",\r\n    \"tags\"       : [\r\n                    {\r\n                        \"area\"  :[[10,10],[50,10],[50,100],[20,100]],\r\n                         \"labels\":{  \r\n                                    \"name\"     :\"test name 1\",\r\n                                    \"location\" :\"location 1\"      \r\n                                 }\r\n                    },\r\n                    {\r\n                         \"area\":[[10,10],[50,100],[20,100],[50,10]],\r\n                       \"labels\":[{  \r\n                                    \"name\"     :\"test name 2\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }]\r\n                    }\r\n                    \r\n                ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 Nov 2021 00:08:49 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 Nov 2021 00:08:49 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "57"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"tags.1.labels.0\": [\n            \"The tags.1.labels.0 must be a string.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Same coordinates are tagged",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\"     : \"title name\",\r\n    \"catagory\"  : \"sample\",\r\n    \"public\"    : 0,  \r\n    \"filename\"  :\"{{filename}}\",\r\n    \"tags\"       : [\r\n                    {\r\n                        \"area\"  :[[10,10],[50,10],[50,100],[20,100]],\r\n                         \"labels\":{  \r\n                                    \"name\"     :\"test name 1\",\r\n                                    \"location\" :\"location 1\"      \r\n                                 }\r\n                    },\r\n                    {\r\n                         \"area\":[[10,10],[50,10],[50,100],[20,100]],\r\n                       \"labels\":{  \r\n                                    \"name\"     :\"test name 2\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }\r\n                    }\r\n                    \r\n                ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "nullable|string|max:255",
+									"disabled": true
+								},
+								{
+									"key": "catagory",
+									"value": "nullable|string|max:255",
+									"disabled": true
+								},
+								{
+									"key": "public",
+									"value": "nullable|boolean",
+									"disabled": true
+								},
+								{
+									"key": "filename",
+									"value": "required",
+									"disabled": true
+								},
+								{
+									"key": "tags",
+									"value": "nullable|array|max:100",
+									"disabled": true
+								},
+								{
+									"key": "tags.*.area",
+									"value": "required_with:tags|array|size:4",
+									"disabled": true
+								},
+								{
+									"key": "tags.*.area.*",
+									"value": "required_with:tags|size:2",
+									"disabled": true
+								},
+								{
+									"key": "tags.*.labels",
+									"value": "array|max:100",
+									"disabled": true
+								},
+								{
+									"key": "tags.*.labels.*",
+									"value": "sometimes|required'|string|max:255",
+									"disabled": true
+								},
+								{
+									"key": "tags.*.labels.*.*[",
+									"value": "nullable|max:255",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 20 Nov 2021 13:38:33 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 20 Nov 2021 13:38:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "56"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"tags.area\": [\n            \"cannot tag the same section\"\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Posts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\"     : \"title name new\",\r\n    \"catagory\"  : \"sample new\",\r\n    \"public\"    : 1,  \r\n    \"tags\"       : [\r\n                    {\r\n                        \"area\"  :[[10,10],[10,20],[20,20],[20,45]],\r\n                         \"labels\":{  \r\n                                    \"name\"     :\"test name 4\",\r\n                                    \"location\" :\"location 3\"\r\n                                 }\r\n                    },\r\n                    {\r\n                        \"area\":[[10,10],[50,100],[20,100],[50,10]],\r\n                        \"labels\":{  \r\n                                    \"name\"     :\"test name 4\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }\r\n                    }\r\n                    \r\n                ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/posts/{{id}}",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"posts",
+						"{{id}}"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "nullable|string|max:255",
+							"disabled": true
+						},
+						{
+							"key": "catagory",
+							"value": "nullable|string|max:255",
+							"disabled": true
+						},
+						{
+							"key": "public",
+							"value": "nullable|boolean",
+							"disabled": true
+						},
+						{
+							"key": "tags",
+							"value": "nullable|array|max:100",
+							"disabled": true
+						},
+						{
+							"key": "tags.*.area",
+							"value": "required_with:tags|array|size:4",
+							"disabled": true
+						},
+						{
+							"key": "tags.*.area.*",
+							"value": "required_with:tags|size:2",
+							"disabled": true
+						},
+						{
+							"key": "tags.*.labels",
+							"value": "array|max:100",
+							"disabled": true
+						},
+						{
+							"key": "tags.*.labels.*",
+							"value": "sometimes|required'|string|max:255",
+							"disabled": true
+						},
+						{
+							"key": "tags.*.labels.*.*",
+							"value": "nullable|max:255",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\"     : \"title name\",\r\n    \"catagory\"  : \"sample\",\r\n    \"public\"    : true,  \r\n    \"tags\"       : [\r\n                    {\r\n                        \"area\"  :[[120,180],[125,661],[125,700],[123,705]],\r\n                         \"labels\":{  \r\n                                    \"name\"     :\"test name 3\",\r\n                                    \"location\" :\"location 3\"\r\n                                 }\r\n                    },\r\n                    {\r\n                        \"area\":[[120,180],[125,661],[125,700],[123,707]],\r\n                        \"labels\":{  \r\n                                    \"name\"     :\"test name 2\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }\r\n                    }\r\n                    \r\n                ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 14:50:23 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 14:50:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"message\": \"post successfully updated\"\n}"
+				},
+				{
+					"name": "Unauthorized",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\"     : \"title name\",\r\n    \"catagory\"  : \"sample\",\r\n    \"public\"    : 0,  \r\n    \"tags\"       : [\r\n                    {\r\n                        \"area\"  :[[10,10],[10,20],[20,20],[20,45]],\r\n                         \"labels\":{  \r\n                                    \"name\"     :\"test name 4\",\r\n                                    \"location\" :\"location 3\"\r\n                                 }\r\n                    },\r\n                    {\r\n                        \"area\":[[10,10],[50,100],[20,100],[50,10]],\r\n                        \"labels\":{  \r\n                                    \"name\"     :\"test name 4\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }\r\n                    }\r\n                    \r\n                ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/{{id}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"{{id}}"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:52:45 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:52:45 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": \"Not authenticated\"\n}"
+				},
+				{
+					"name": "Invalid number of Coordinates",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\"     : \"title name\",\r\n    \"catagory\"  : \"sample\",\r\n    \"public\"    : true,\r\n    \"tags\"       : [\r\n                    {\r\n                        \"area\"  :[[50,100],[20,100]],\r\n                         \"labels\":{  \r\n                                    \"name\"     :\"test name 1\",\r\n                                    \"location\" :\"location 1\"      \r\n                                 }\r\n                    },\r\n                    {\r\n                        \"area\":[[10,10],[50,100],[20,100],[50,10]],\r\n                        \"labels\":{  \r\n                                    \"name\"     :\"test name 2\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }\r\n                    }\r\n                    \r\n                ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"2"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 22:47:33 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 22:47:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"tags.0.area\": [\n            \"The tags.0.area must contain 4 items.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Coordinates out of bounds Copy",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\"     : \"title name\",\r\n    \"catagory\"  : \"sample\",\r\n    \"public\"    : true,  \r\n    \"tags\"       : [\r\n                    {\r\n                        \"area\"  :[[1000,10],[50,10],[50,100],[20,100]],\r\n                         \"labels\":{  \r\n                                    \"name\"     :123,\r\n                                    \"location\" :\"location 1\"      \r\n                                 }\r\n                    },\r\n                    {\r\n                        \"area\":[[10,10],[50,100],[20,100],[50,10]],\r\n                        \"labels\":{  \r\n                                    \"name\"     :\"test name 2\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }\r\n                    }\r\n                    \r\n                ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"2"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:29:17 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:29:17 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"tags.0.area.0\": [\n            \"tags.0.area.0 out of bounds\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Invalid Label format",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\"     : \"title name\",\r\n    \"catagory\"  : \"sample\",\r\n    \"public\"    : true,  \r\n    \"tags\"       : [\r\n                    {\r\n                        \"area\"  :[[10,10],[50,10],[50,100],[20,100]],\r\n                         \"labels\":[  \r\n                                    {\"name\"     :123},\r\n                                    {\"location\" :\"location 1\"}      \r\n                                 ]\r\n                    },\r\n                    {\r\n                        \"area\":[[10,10],[50,100],[20,100],[50,10]],\r\n                        \"labels\":{  \r\n                                    \"name\"     :\"test name 2\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }\r\n                    }\r\n                    \r\n                ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"2"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:33:54 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:33:54 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "57"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"tags.1.labels.name\": [\n            \"The tags.1.labels.name must be an array.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "same coordinates are provided",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\"     : \"title name new\",\r\n    \"catagory\"  : \"sample new\",\r\n    \"public\"    : 1,  \r\n    \"tags\"       : [\r\n                    {\r\n                        \"area\"  :[[10,10],[20,45],[10,20],[20,20]],\r\n                         \"labels\":{  \r\n                                    \"name\"     :\"test name 4\",\r\n                                    \"location\" :\"location 3\"\r\n                                 }\r\n                    },\r\n                    {\r\n                        \"area\":[[20,45],[10,10],[10,20],[20,20]],\r\n                        \"labels\":{  \r\n                                    \"name\"     :\"test name 4\",\r\n                                    \"location\" :\"location 2\"      \r\n                                 }\r\n                    }\r\n                    \r\n                ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/{{id}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"{{id}}"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "nullable|string|max:255",
+									"disabled": true
+								},
+								{
+									"key": "catagory",
+									"value": "nullable|string|max:255",
+									"disabled": true
+								},
+								{
+									"key": "public",
+									"value": "nullable|boolean",
+									"disabled": true
+								},
+								{
+									"key": "tags",
+									"value": "nullable|array|max:100",
+									"disabled": true
+								},
+								{
+									"key": "tags.*.area",
+									"value": "required_with:tags|array|size:4",
+									"disabled": true
+								},
+								{
+									"key": "tags.*.area.*",
+									"value": "required_with:tags|size:2",
+									"disabled": true
+								},
+								{
+									"key": "tags.*.labels",
+									"value": "array|max:100",
+									"disabled": true
+								},
+								{
+									"key": "tags.*.labels.*",
+									"value": "sometimes|required'|string|max:255",
+									"disabled": true
+								},
+								{
+									"key": "tags.*.labels.*.*",
+									"value": "nullable|max:255",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 20 Nov 2021 13:39:45 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 20 Nov 2021 13:39:45 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": {\n        \"tags.area\": [\n            \"cannot tag the same section\"\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "My Posts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/myposts",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"myposts"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 20:06:19 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 20:06:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"data\": {\n        \"current_page\": 1,\n        \"data\": [\n            {\n                \"id\": 10,\n                \"public\": 1,\n                \"title\": \"title name\",\n                \"catagory\": \"sample\",\n                \"image_path\": \"http://127.0.0.1:8000/storage/posts/yV002g3yscpp3kCYKMQpYomMBOBQSrjBOmboKmsQ.png\",\n                \"created_at\": \"2021-11-18T19:27:46.000000Z\",\n                \"updated_at\": \"2021-11-18T19:27:46.000000Z\"\n            },\n            {\n                \"id\": 9,\n                \"public\": 1,\n                \"title\": \"title name\",\n                \"catagory\": \"sample\",\n                \"image_path\": \"http://127.0.0.1:8000/storage/posts/AjeG0w8w86TmnYTtY4ibQa39WSzvOzB4tOwoKYu1.png\",\n                \"created_at\": \"2021-11-18T18:55:35.000000Z\",\n                \"updated_at\": \"2021-11-18T18:55:35.000000Z\"\n            },\n            {\n                \"id\": 8,\n                \"public\": 1,\n                \"title\": \"title name\",\n                \"catagory\": \"sample\",\n                \"image_path\": \"http://127.0.0.1:8000/storage/posts/2QULZNmxM4UqDdcCF7Xju2wap6gZGZVGWSlt8jqz.png\",\n                \"created_at\": \"2021-11-18T18:51:06.000000Z\",\n                \"updated_at\": \"2021-11-18T18:51:06.000000Z\"\n            },\n            {\n                \"id\": 7,\n                \"public\": 1,\n                \"title\": \"title name\",\n                \"catagory\": \"sample\",\n                \"image_path\": \"http://127.0.0.1:8000/storage/posts/SZoGFepLVQIx6KmxDTPvI7YXeghM2DNafvoyD0k8.png\",\n                \"created_at\": \"2021-11-18T18:33:41.000000Z\",\n                \"updated_at\": \"2021-11-18T18:33:41.000000Z\"\n            },\n            {\n                \"id\": 6,\n                \"public\": 1,\n                \"title\": \"title name\",\n                \"catagory\": \"sample\",\n                \"image_path\": \"http://127.0.0.1:8000/storage/posts/JuoTyQnEEzAVHuBOKZeC4MXw4vtwiBzEfor8w8ps.png\",\n                \"created_at\": \"2021-11-18T18:31:29.000000Z\",\n                \"updated_at\": \"2021-11-18T18:31:29.000000Z\"\n            },\n            {\n                \"id\": 5,\n                \"public\": 1,\n                \"title\": \"title name\",\n                \"catagory\": \"sample\",\n                \"image_path\": \"http://127.0.0.1:8000/storage/posts/4IE93oceIIwiCCoBi2b1ahwZFDxSMIHzptglo8NC.png\",\n                \"created_at\": \"2021-11-18T18:29:55.000000Z\",\n                \"updated_at\": \"2021-11-18T18:29:55.000000Z\"\n            },\n            {\n                \"id\": 4,\n                \"public\": 1,\n                \"title\": \"title name\",\n                \"catagory\": \"sample\",\n                \"image_path\": \"http://127.0.0.1:8000/storage/posts/iF0AKwMaZE3DZjK088DmEMCuggY5yCfSZ1FzzAvN.png\",\n                \"created_at\": \"2021-11-18T18:25:35.000000Z\",\n                \"updated_at\": \"2021-11-18T18:25:35.000000Z\"\n            },\n            {\n                \"id\": 3,\n                \"public\": 1,\n                \"title\": \"title name\",\n                \"catagory\": \"sample\",\n                \"image_path\": \"http://127.0.0.1:8000/storage/posts/AF1M4sho6e4Fv5otNZLV2YzMCW9bD36TOgfHKWoB.png\",\n                \"created_at\": \"2021-11-18T16:17:33.000000Z\",\n                \"updated_at\": \"2021-11-18T16:17:33.000000Z\"\n            },\n            {\n                \"id\": 2,\n                \"public\": 1,\n                \"title\": \"title name\",\n                \"catagory\": \"sample\",\n                \"image_path\": \"http://127.0.0.1:8000/storage/posts/LepvBni9EzpmaJnRgeSl4Vel7bAYv2p7t0PJAirz.png\",\n                \"created_at\": \"2021-11-18T16:08:02.000000Z\",\n                \"updated_at\": \"2021-11-18T16:08:02.000000Z\"\n            },\n            {\n                \"id\": 1,\n                \"public\": 1,\n                \"title\": \"title name\",\n                \"catagory\": \"sample\",\n                \"image_path\": \"http://127.0.0.1:8000/storage/posts/t75gtaKMtXD3wHrvZY4zsBBY5p2ALWcNDen1mFiO.png\",\n                \"created_at\": \"2021-11-18T15:57:30.000000Z\",\n                \"updated_at\": \"2021-11-18T15:57:30.000000Z\"\n            }\n        ],\n        \"first_page_url\": \"http://127.0.0.1:8000/api/posts?page=1\",\n        \"from\": 1,\n        \"next_page_url\": null,\n        \"path\": \"http://127.0.0.1:8000/api/posts\",\n        \"per_page\": 15,\n        \"prev_page_url\": null,\n        \"to\": 10\n    }\n}"
+				},
+				{
+					"name": "Unauthorized",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/mine",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"mine"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:50:55 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:50:55 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": \"Not authenticated\"\n}"
+				},
+				{
+					"name": "No Content",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/mine",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"mine"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:56:13 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:56:13 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "My Post Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Successful GET request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/posts/{{id}}",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"posts",
+						"{{id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/{{id}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"{{id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 20:24:53 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 20:24:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"data\": {\n        \"id\": 10,\n        \"public\": 1,\n        \"title\": \"title name\",\n        \"catagory\": \"sample\",\n        \"image_path\": \"http://127.0.0.1:8000/storage/posts/yV002g3yscpp3kCYKMQpYomMBOBQSrjBOmboKmsQ.png\",\n        \"created_at\": \"2021-11-18T19:27:46.000000Z\",\n        \"updated_at\": \"2021-11-18T19:27:46.000000Z\",\n        \"tags\": [\n            {\n                \"area\": [\n                    [\n                        10,\n                        10\n                    ],\n                    [\n                        10,\n                        20\n                    ],\n                    [\n                        20,\n                        20\n                    ],\n                    [\n                        20,\n                        45\n                    ],\n                    [\n                        10,\n                        10\n                    ]\n                ],\n                \"labels\": {\n                    \"name\": \"test name 4\",\n                    \"location\": \"location 3\"\n                }\n            },\n            {\n                \"area\": [\n                    [\n                        10,\n                        10\n                    ],\n                    [\n                        50,\n                        100\n                    ],\n                    [\n                        20,\n                        100\n                    ],\n                    [\n                        50,\n                        10\n                    ],\n                    [\n                        10,\n                        10\n                    ]\n                ],\n                \"labels\": {\n                    \"name\": \"test name 4\",\n                    \"location\": \"location 2\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "Invalid id provided",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/{{id}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"{{id}}"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:57:12 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:57:12 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": \"invalid request\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/logout",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"logout"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/logout",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"logout"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 00:07:02 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 00:07:02 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"message\": \"Logged out\"\n}"
+				},
+				{
+					"name": "Already logged out",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/logout",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"logout"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:42:09 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:42:09 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": true,\n    \"message\": \"Not authenticated\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Public Posts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200/204\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/posts",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 15:52:50 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 15:52:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "57"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": false,\n    \"data\": {\n        \"current_page\": 1,\n        \"data\": [\n            {\n                \"id\": 1,\n                \"public\": 1,\n                \"title\": \"title name\",\n                \"catagory\": \"sample\",\n                \"image_path\": \"http://127.0.0.1:8000/storage/posts/K07ykQTtgrnDpIZv1ezvfEFnPRvjBqrv3rWgcm0O.png\",\n                \"created_at\": \"2021-11-18T10:08:05.000000Z\",\n                \"updated_at\": \"2021-11-18T10:08:05.000000Z\"\n            },\n            {\n                \"id\": 2,\n                \"public\": 1,\n                \"title\": \"title name\",\n                \"catagory\": \"sample\",\n                \"image_path\": \"http://127.0.0.1:8000/storage/posts/bhGOj98sPTVatJFNyVBsbpwz049MsojKZGBzN7me.png\",\n                \"created_at\": \"2021-11-18T10:16:23.000000Z\",\n                \"updated_at\": \"2021-11-18T10:16:23.000000Z\"\n            },\n            {\n                \"id\": 3,\n                \"public\": 1,\n                \"title\": \"title name\",\n                \"catagory\": \"sample\",\n                \"image_path\": \"http://127.0.0.1:8000/storage/posts/hpe7BG0WzY074i2Mj5mIZ6afk5wphF2qLG4UdQ2X.png\",\n                \"created_at\": \"2021-11-18T13:35:18.000000Z\",\n                \"updated_at\": \"2021-11-18T13:35:18.000000Z\"\n            },\n            {\n                \"id\": 4,\n                \"public\": 1,\n                \"title\": \"title name\",\n                \"catagory\": \"sample\",\n                \"image_path\": \"http://127.0.0.1:8000/storage/posts/GlHkdnBePy15hkYFH7WjnSSoAVzKCtrk1J8sgfkV.png\",\n                \"created_at\": \"2021-11-18T13:36:31.000000Z\",\n                \"updated_at\": \"2021-11-18T13:36:31.000000Z\"\n            },\n            {\n                \"id\": 5,\n                \"public\": 1,\n                \"title\": \"title name\",\n                \"catagory\": \"sample\",\n                \"image_path\": \"http://127.0.0.1:8000/storage/posts/VTg7DflM6gOtSIiMYPE7XFiomiS3v3x14skicT72.png\",\n                \"created_at\": \"2021-11-18T14:03:08.000000Z\",\n                \"updated_at\": \"2021-11-18T14:03:08.000000Z\"\n            },\n            {\n                \"id\": 6,\n                \"public\": 1,\n                \"title\": \"title name\",\n                \"catagory\": \"sample\",\n                \"image_path\": \"http://127.0.0.1:8000/storage/posts/MORlgdDb0VlIbK4jozfclOtWbAPlNLvPVDDtke0y.png\",\n                \"created_at\": \"2021-11-18T14:04:00.000000Z\",\n                \"updated_at\": \"2021-11-18T14:04:00.000000Z\"\n            }\n        ],\n        \"first_page_url\": \"http://127.0.0.1:8000/api/posts?page=1\",\n        \"from\": 1,\n        \"next_page_url\": null,\n        \"path\": \"http://127.0.0.1:8000/api/posts\",\n        \"per_page\": 15,\n        \"prev_page_url\": null,\n        \"to\": 6\n    }\n}"
+				},
+				{
+					"name": "No Content Available",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:49:47 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Nov 2021 23:49:47 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.28"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
