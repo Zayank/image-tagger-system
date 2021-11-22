@@ -4,9 +4,11 @@ Xampp Mysql Module & php Artisan CLI
 PHP 7.3.28 & Mysql Ver 15.1 Distrib 10.4.19-MariaDB
 
 ## Step for setup
-- **set env parameters
-- **php artisan migrate
-- **run postman collection to ensure all tests are successful
+- composer update
+- set env parameters
+- php artisan migrate
+- php artisan storage:link
+- run postman collection to ensure all tests are successful
 
 
 ## References
