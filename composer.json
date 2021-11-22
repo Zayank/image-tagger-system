@@ -23,8 +23,12 @@
         "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
+        "exclude-from-classmap": [
+            "vendor/grimzy/laravel-mysql-spatial/src/Eloquent/SpatialExpression.php"
+        ],
         "psr-4": {
             "App\\": "app/",
+            "Illuminate\\": "app/Overrides/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
